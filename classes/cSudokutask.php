@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Павел
- * Date: 29.11.13
- * Time: 13:10
- */
 
 class cSudokutask {
 

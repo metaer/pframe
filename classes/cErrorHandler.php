@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Павел
- * Date: 25.11.13
- * Time: 13:42
- */
 
 class cErrorHandler {
 
@@ -27,13 +21,13 @@ class cErrorHandler {
 		E_ALL => 'E_ALL'
 	);
 
-    static function handle($errno, $errstr, $file, $line){
+	static function handle($errno, $errstr, $file, $line){
 
-        $error_type = self::$error_types[$errno];
+		$error_type = self::$error_types[$errno];
 
 		self::error_report($errstr,$file,$line,$error_type);
 
-    }
+	}
 
 	private static function error_report($text,$file,$line,$error_type = null){
 		$date = date("Y.m.d H:i:s");
@@ -49,20 +43,20 @@ class cErrorHandler {
 			echo "<b>$message</b>";
 	}
 
-    /**
-     * Перехват фатальных ошибок
-     */
-    static function fatal(){
-        $err = error_get_last();
+	/**
+	 * Перехват фатальных ошибок
+	 */
+	static function fatal(){
+		$err = error_get_last();
 
-        $err_type = &$err['type'];
+		$err_type = &$err['type'];
 
-        $fatal_array = array(E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR, E_RECOVERABLE_ERROR);
+		$fatal_array = array(E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR, E_RECOVERABLE_ERROR);
 
-        if ($err && in_array($err_type,$fatal_array))
-            self::handle($err_type,$err['message'],$err['file'],$err['line']);
+		if ($err && in_array($err_type,$fatal_array))
+			self::handle($err_type,$err['message'],$err['file'],$err['line']);
 
-    }
+	}
 
 	public static function sql_query_error($message,$file,$line){
 		$message.="<br><pre>".cDataBase::getInstance()->get_last_query()."</pre><br>";

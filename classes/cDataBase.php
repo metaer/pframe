@@ -8,24 +8,24 @@
 
 class cDataBase {
 
-    private $db_server;
-    private $user;
-    private $pass;
+	private $db_server;
+	private $user;
+	private $pass;
 	private $db_name;
 
-    private $pdo;
+	private $pdo;
 
 	private $connected;
 
 	private $last_query;
 
-    protected static $instance;
+	protected static $instance;
 
 	private function __clone(){}  // Защищаем от создания через клонирование
 
 	private function __wakeup(){}  // Защищаем от создания через unserialize
 
-    private function __construct(){
+	private function __construct(){
 		$this->db_server = WORKING_DB_SERVER ? WORKING_SERVER : TEST_SERVER;
 		$this->user		 = WORKING_DB_SERVER ? WORKING_LOGIN : TEST_LOGIN;
 		$this->pass		 = WORKING_DB_SERVER ? WORKING_PASS : TEST_PASS;
@@ -40,7 +40,7 @@ class cDataBase {
 
 		$this->connected = (bool)$this->pdo;
 
-    }
+	}
 
 	public static function getInstance() {
 		if ( !isset(self::$instance) )
@@ -181,8 +181,8 @@ class cDataBase {
 	private function set_backtrace_data(&$file,&$line){
 		if(!$file || !$line){
 			$backtrace = debug_backtrace();
-			$file      = $backtrace[1]['file'];
-			$line      = $backtrace[1]['line'];
+			$file	  = $backtrace[1]['file'];
+			$line	  = $backtrace[1]['line'];
 		}
 	}
 

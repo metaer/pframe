@@ -8,13 +8,13 @@ final class cMain extends cController
 	 */
 	protected $model;
 
-    public function __construct(){
-        parent::__construct(__CLASS__);
+	public function __construct(){
+		parent::__construct(__CLASS__);
 		$this->add_bootstrap();
-    }
+	}
 
-    public function index(){
-        $template = &$this->template;
+	public function index(){
+		$template = &$this->template;
 
 		$template->set('title','Решатель судоку');
 		$template->set('active','main');
@@ -24,7 +24,7 @@ final class cMain extends cController
 		$this->add_noty();
 
 		$template->display(null,null,false);
-    }
+	}
 
 
 }
