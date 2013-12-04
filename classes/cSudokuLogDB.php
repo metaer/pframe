@@ -112,6 +112,3 @@ class cSudokuLogDB {
 		");
 	}
 }
-
-//TODO Сделать разделы "О программе", "MVC-каркас",
-//TODO Выложить на github

@@ -3,8 +3,6 @@
 class cController
 {
 
-//TODO Написать комменты в файлах
-
 	protected $model;
 
 	protected $template;
