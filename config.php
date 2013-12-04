@@ -1,24 +1,24 @@
 <?
 
-const SERVER_NAME_TEST_VER = 	'***'; //SERVER_NAME тестовой версии. Не должно совпадать с SERVER_NAME рабочей версии!
-const WEBMASTER_EMAIL = 		'***'; //e-mail, куда будет сливаться инфа об ошибках и прочая лабуда с сайта
-const THEME_ERROR_SITE = 		'Перехваченная ошибка'; //Тема письма-уведомления о перехваченных ошибках.
-const SITE_ADMIN = 				'***'; //Отправитель писем
-const SEND_MAIL_TEST_SERVER = 		false; //Константа показывает, нужно ли отправлять письма с тестового сервера
-const WORKING_DB_SERVER = 		false; //Показывает какую базу данных следует использовать: тестовую или рабочую.
-const TEST_SERVER = 			'***'; //Тестовый сервер с СУБД
-const TEST_LOGIN =			    '***';
-const TEST_PASS = 				'***';
+const SERVER_NAME_TEST_VER =    '***'; //SERVER_NAME тестовой версии. Не должно совпадать с SERVER_NAME рабочей версии!
+const WEBMASTER_EMAIL =         '***'; //e-mail, куда будет сливаться инфа об ошибках и прочая лабуда с сайта
+const THEME_ERROR_SITE =        'Перехваченная ошибка'; //Тема письма-уведомления о перехваченных ошибках.
+const SITE_ADMIN =              '***'; //Отправитель писем
+const SEND_MAIL_TEST_SERVER =   false; //Константа показывает, нужно ли отправлять письма с тестового сервера
+const WORKING_DB_SERVER =       false; //Показывает какую базу данных следует использовать: тестовую или рабочую.
+const TEST_SERVER =             '***'; //Тестовый сервер с СУБД
+const TEST_LOGIN =              '***';
+const TEST_PASS =               '***';
 
-const WORKING_LOGIN = 			'***';
-const WORKING_PASS = 			'***';
-const MAIN_DB_NAME = 			'***'; //База данных по дефолту.
+const WORKING_LOGIN =           '***';
+const WORKING_PASS =            '***';
+const MAIN_DB_NAME =            '***'; //База данных по дефолту.
 
-const DEFAULT_CONTROLLER = 		'cMain';
-const DEFAULT_ACTION = 			'index';
+const DEFAULT_CONTROLLER =      'cMain';
+const DEFAULT_ACTION =          'index';
 
-const EXTERNAL_IP_WORKING_SERVER = 		'***';
-const INTERNAL_IP_WORKING_SERVER = 		'***';
+const EXTERNAL_IP_WORKING_SERVER =      '***';
+const INTERNAL_IP_WORKING_SERVER =      '***';
 
 const TECHNICAL_WORK = false; //Повесить на рабочую версию сообщение "Технические работы"
 
