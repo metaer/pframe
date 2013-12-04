@@ -1,0 +1,26 @@
+.sudoku_field{
+    width: 270px !important;
+}
+
+.sudoku_field tr{
+    height: 30px !important;
+    padding: 0 !important;
+}
+
+.sudoku_field td{
+    width: 30px !important;
+    padding: 0 !important;
+}
+
+.sudoku_field input{
+    border: 0 none;
+    padding:0;
+    width: 29px;
+    height: 29px;
+    text-align:center;
+    outline: none;
+}
+
+.progress_anim {
+    background: #fff url(/images/progress.gif) no-repeat center center;
+}

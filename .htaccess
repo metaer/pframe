@@ -1,0 +1,5 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !^favicon\.ico
+RewriteRule ^(.*)$ entry.php [L,QSA]
+

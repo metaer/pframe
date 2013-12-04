@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<? if (isset($title)):?>
+        	<title><?=$title?></title>
+		<?endif?>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+		<?#Базовый css?>
+        <? if (file_exists(BASE_DIR_S.'css/'.$this->short_controller_name.'.css') && $include_base_css): ?>
+            <link href="<?="/css/".$this->short_controller_name?>.css<?=ADD_TIME_TO_JS_CSS && !in_array("/css/".$this->short_controller_name.".css",$aajc) ? "?".time() : ""?>" rel="stylesheet" type="text/css">
+        <?endif?>
+
+		<?#Дополнительные css?>
+        <? foreach ($this->additional_css as $value): ?>
+			<? if (file_exists(BASE_DIR.$value)): ?>
+				<link href="<?=$value.(ADD_TIME_TO_JS_CSS && !in_array($value,$aajc) ? "?".time() : "")?>" rel="stylesheet" type="text/css">
+			<? endif ?>
+		<? endforeach ?>
+
+		<?#Базовый js?>
+        <? if (file_exists(BASE_DIR_S.'js/'.$this->short_controller_name.'.js') && $include_base_js): ?>
+			<script src="<?="/js/".$this->short_controller_name?>.js"<?=ADD_TIME_TO_JS_CSS && !in_array("/js/".$this->short_controller_name.".js",$aajc) ? "?".time() : ""?> type="text/javascript"></script>
+		<?endif?>
+
+		<?#Дополнительные js?>
+
+		<? foreach ($this->additional_js as $value): ?>
+			<? if (file_exists(BASE_DIR.$value)): ?>
+				<script src="<?=$value.(ADD_TIME_TO_JS_CSS && !in_array($value,$aajc)? "?".time() : "")?>" type="text/javascript"></script>
+			<? endif ?>
+		<? endforeach ?>
+
+    </head>
+<body>
+
+<div class="navbar navbar-default">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="/">sudoku24.ru</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+
+					<li <?if (isset($active) && $active == 'main'):?>class="active"<?endif?>> <a href="/">Главная</a></li>
+					<li><a target="_blank" href="https://docs.google.com/spreadsheet/viewform?fromEmail=true&formkey=dFdrMXpjNzVUdjc3Z3RGaFJfMm1NTlE6MQ">Сообщить об ошибке</a> </li>
+
+					<?/*
+					<li <?if (isset($active) && $active == 'about'):?>class="active"<?endif?>> <a href="/about">О программе</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Другие разделы<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="/">Статистика решений</a></li>
+							<li><a href="/">Другие решатели судоку</a></li>
+						</ul>
+					</li>
+					<li> <a href="http://old.sudoku24.ru">Старый сайт</a></li>
+					*/?>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
