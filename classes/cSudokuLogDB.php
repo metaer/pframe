@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Павел
- * Date: 29.11.13
- * Time: 16:10
- */
 
 class cSudokuLogDB {
 

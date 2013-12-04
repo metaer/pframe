@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Павел
- * Date: 26.11.13
- * Time: 10:07
- */
 
 class cDataBase {
 
