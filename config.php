@@ -4,10 +4,10 @@ const SERVER_NAME_TEST_VER = 	'***'; //SERVER_NAME тестовой версии
 const WEBMASTER_EMAIL = 		'***'; //e-mail, куда будет сливаться инфа об ошибках и прочая лабуда с сайта
 const THEME_ERROR_SITE = 		'Перехваченная ошибка'; //Тема письма-уведомления о перехваченных ошибках.
 const SITE_ADMIN = 				'***'; //Отправитель писем
-const SEND_MAIL_TEST_SERVER = 	false; //Константа показывает, нужно ли отправлять письма с тестового сервера
+const SEND_MAIL_TEST_SERVER = 		false; //Константа показывает, нужно ли отправлять письма с тестового сервера
 const WORKING_DB_SERVER = 		false; //Показывает какую базу данных следует использовать: тестовую или рабочую.
 const TEST_SERVER = 			'***'; //Тестовый сервер с СУБД
-const TEST_LOGIN = 				'***';
+const TEST_LOGIN =			    '***';
 const TEST_PASS = 				'***';
 
 const WORKING_LOGIN = 			'***';
