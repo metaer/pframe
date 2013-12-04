@@ -6,4 +6,4 @@ class cAjaxModel extends cModel {
 		parent::__construct();
 	}
 
-} 
+}

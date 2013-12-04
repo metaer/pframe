@@ -8,3 +8,4 @@ class cModel{
 		$this->db = cDataBase::getInstance();
 	}
 }
+

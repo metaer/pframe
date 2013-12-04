@@ -5,4 +5,4 @@ class cSinglepagesModel extends cModel {
 		parent::__construct();
 	}
 
-} 
+}
