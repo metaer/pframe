@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <head>
+	<head>
 		<? if (isset($title)):?>
-        	<title><?=$title?></title>
+			<title><?=$title?></title>
 		<?endif?>
 
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 		<?#Базовый css?>
-        <? if (file_exists(BASE_DIR_S.'css/'.$this->short_controller_name.'.css') && $include_base_css): ?>
-            <link href="<?="/css/".$this->short_controller_name?>.css<?=ADD_TIME_TO_JS_CSS && !in_array("/css/".$this->short_controller_name.".css",$aajc) ? "?".time() : ""?>" rel="stylesheet" type="text/css">
-        <?endif?>
+		<? if (file_exists(BASE_DIR_S.'css/'.$this->short_controller_name.'.css') && $include_base_css): ?>
+			<link href="<?="/css/".$this->short_controller_name?>.css<?=ADD_TIME_TO_JS_CSS && !in_array("/css/".$this->short_controller_name.".css",$aajc) ? "?".time() : ""?>" rel="stylesheet" type="text/css">
+		<?endif?>
 
 		<?#Дополнительные css?>
-        <? foreach ($this->additional_css as $value): ?>
+		<? foreach ($this->additional_css as $value): ?>
 			<? if (file_exists(BASE_DIR.$value)): ?>
 				<link href="<?=$value.(ADD_TIME_TO_JS_CSS && !in_array($value,$aajc) ? "?".time() : "")?>" rel="stylesheet" type="text/css">
 			<? endif ?>
 		<? endforeach ?>
 
 		<?#Базовый js?>
-        <? if (file_exists(BASE_DIR_S.'js/'.$this->short_controller_name.'.js') && $include_base_js): ?>
+		<? if (file_exists(BASE_DIR_S.'js/'.$this->short_controller_name.'.js') && $include_base_js): ?>
 			<script src="<?="/js/".$this->short_controller_name?>.js"<?=ADD_TIME_TO_JS_CSS && !in_array("/js/".$this->short_controller_name.".js",$aajc) ? "?".time() : ""?> type="text/javascript"></script>
 		<?endif?>
 
@@ -32,7 +32,7 @@
 			<? endif ?>
 		<? endforeach ?>
 
-    </head>
+	</head>
 <body>
 
 <div class="navbar navbar-default">
