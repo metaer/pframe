@@ -1,28 +1,28 @@
 <?
 
-	$from = &$navigation_params['navigation_from'];
-	$to = &$navigation_params['navigation_to'];
-	$l_points = &$navigation_params['left_suspension_points'];
-	$r_points = &$navigation_params['right_suspension_points'];
-	$page = &$navigation_params['current_page'];
+    $from = &$navigation_params['navigation_from'];
+    $to = &$navigation_params['navigation_to'];
+    $l_points = &$navigation_params['left_suspension_points'];
+    $r_points = &$navigation_params['right_suspension_points'];
+    $page = &$navigation_params['current_page'];
 ?>
 
 <? if ($navigation_params):?>
-	<div>
-		<br>
-		&nbsp&nbsp
-		<? if ($l_points): ?>
-			<a href="<?=str_replace('page_number_pattern',1,$navigation_href)?>">Первая</a>
-			<a class="suspension_points" href="<?=str_replace('page_number_pattern',$from-1,$navigation_href)?>">...</a>
-		<? endif; ?>
+    <div>
+        <br>
+        &nbsp&nbsp
+        <? if ($l_points): ?>
+            <a href="<?=str_replace('page_number_pattern',1,$navigation_href)?>">Первая</a>
+            <a class="suspension_points" href="<?=str_replace('page_number_pattern',$from-1,$navigation_href)?>">...</a>
+        <? endif; ?>
 
-		<? for ($i = $from; $i <= $to; $i++):  ?>
-			<a <? if ($i == $page): ?> class="selected" <? endif; ?> href="<?=str_replace('page_number_pattern',$i,$navigation_href)?>"><?=$i?></a>
-		<? endfor; ?>
+        <? for ($i = $from; $i <= $to; $i++):  ?>
+            <a <? if ($i == $page): ?> class="selected" <? endif; ?> href="<?=str_replace('page_number_pattern',$i,$navigation_href)?>"><?=$i?></a>
+        <? endfor; ?>
 
-		<? if ($r_points): ?>
-			<a class="suspension_points" href="<?=str_replace('page_number_pattern',$to+1,$navigation_href)?>">...</a>
-			<a href="<?=str_replace('page_number_pattern',$count_pages,$navigation_href)?>">Последняя</a>
-		<? endif; ?>
-	</div>
+        <? if ($r_points): ?>
+            <a class="suspension_points" href="<?=str_replace('page_number_pattern',$to+1,$navigation_href)?>">...</a>
+            <a href="<?=str_replace('page_number_pattern',$count_pages,$navigation_href)?>">Последняя</a>
+        <? endif; ?>
+    </div>
 <? endif; ?>

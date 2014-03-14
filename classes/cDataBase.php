@@ -1,183 +1,191 @@
 <?php
 
+/**
+ * Class cDataBase
+ * Класс для работы с БД
+ * Будем использовать паттерн Singleton
+ */
 class cDataBase {
 
-	private $db_server;
-	private $user;
-	private $pass;
-	private $db_name;
+    private $db_server;
 
-	private $pdo;
+    private $user;
 
-	private $connected;
+    private $pass;
 
-	private $last_query;
+    private $db_name;
 
-	protected static $instance;
+    private $pdo;
 
-	private function __clone(){}  // Защищаем от создания через клонирование
+    private $connected;
 
-	private function __wakeup(){}  // Защищаем от создания через unserialize
+    private $last_query;
 
-	private function __construct(){
-		$this->db_server = WORKING_DB_SERVER ? WORKING_SERVER : TEST_SERVER;
-		$this->user		 = WORKING_DB_SERVER ? WORKING_LOGIN : TEST_LOGIN;
-		$this->pass		 = WORKING_DB_SERVER ? WORKING_PASS : TEST_PASS;
-		$this->db_name   = MAIN_DB_NAME;
+    protected static $instance;
 
-		try{
-			$this->pdo = new PDO("mysql:host=$this->db_server;dbname=$this->db_name", $this->user, $this->pass);
-		}
-		catch(PDOException $e){
-			trigger_error('Ошибка коннекта к базе: '.$e->getMessage(),E_USER_WARNING);
-		}
+    private function __clone(){}  // Защищаем от создания через клонирование
 
-		$this->connected = (bool)$this->pdo;
+    private function __wakeup(){}  // Защищаем от создания через unserialize
 
-	}
+    private function __construct(){
+        $this->db_server = WORKING_DB_SERVER ? WORKING_SERVER : TEST_SERVER;
+        $this->user      = WORKING_DB_SERVER ? WORKING_LOGIN : TEST_LOGIN;
+        $this->pass      = WORKING_DB_SERVER ? WORKING_PASS : TEST_PASS;
+        $this->db_name   = MAIN_DB_NAME;
 
-	public static function getInstance() {
-		if ( !isset(self::$instance) )
-			self::$instance = new cDataBase();
-		return self::$instance;
-	}
+        try{
+            $this->pdo = new PDO("mysql:host=$this->db_server;dbname=$this->db_name", $this->user, $this->pass);
+        }
+        catch(PDOException $e){
+            trigger_error('Ошибка коннекта к базе: '.$e->getMessage(),E_USER_WARNING);
+        }
 
-	public function get_last_query(){
-		return $this->last_query;
-	}
+        $this->connected = (bool)$this->pdo;
 
-	#-----------------------------------
+    }
 
-	/**
-	 * Выполняет запрос и возвращает количество затронутых рядов (update,insert,...) Рекомендуется использовать для не-select запросов
-	 * @param $query
-	 * @param null $file
-	 * @param null $line
-	 */
-	public function non_select_query($query,$file=null,$line=null){
+    public static function getInstance() {
+        if ( !isset(self::$instance) )
+            self::$instance = new cDataBase();
+        return self::$instance;
+    }
 
-		if (!$this->connected)
-			return false;
+    public function get_last_query(){
+        return $this->last_query;
+    }
 
-		$this->set_backtrace_data($file,$line);
+    #-----------------------------------
 
-		$pdo_st = $this->query($query,$file,$line);
+    /**
+     * Выполняет запрос и возвращает количество затронутых рядов (update,insert,...) Рекомендуется использовать для не-select запросов
+     * @param $query
+     * @param null $file
+     * @param null $line
+     */
+    public function non_select_query($query,$file=null,$line=null){
 
-		$this->check_pdo_st($pdo_st,$file,$line);
+        if (!$this->connected)
+            return false;
 
-		return $pdo_st ? $pdo_st->rowCount() : false;
+        $this->set_backtrace_data($file,$line);
 
-	}
+        $pdo_st = $this->query($query,$file,$line);
 
-	/**
-	 * Выполняет sql_запрос и возвращает записи из результата запроса в виде ассоциативного массива. Использовать для select запросов
-	 * @param $query
-	 * @param null $file
-	 * @param null $line
-	 * @return bool|null
-	 */
-	public function select_query($query,$file = null,$line = null){
+        $this->check_pdo_st($pdo_st,$file,$line);
 
-		if (!$this->connected)
-			return false;
+        return $pdo_st ? $pdo_st->rowCount() : false;
 
-		$this->set_backtrace_data($file,$line);
+    }
 
-		$pdo_st = $this->query($query,$file,$line);
+    /**
+     * Выполняет sql_запрос и возвращает записи из результата запроса в виде ассоциативного массива. Использовать для select запросов
+     * @param $query
+     * @param null $file
+     * @param null $line
+     * @return bool|null
+     */
+    public function select_query($query,$file = null,$line = null){
 
-		return $this->fetch($pdo_st, null, $file,$line);
+        if (!$this->connected)
+            return false;
 
-	}
+        $this->set_backtrace_data($file,$line);
 
-	/**
-	 * Возвращает один ряд с данными
-	 *
-	 * @param $query
-	 * @param null $file
-	 * @param null $line
-	 * @return null Один ряд с данными
-	 */
-	public function select_first_row_query($query,$file=null,$line=null){
+        $pdo_st = $this->query($query,$file,$line);
 
-		if (!$this->connected)
-			return false;
+        return $this->fetch($pdo_st, null, $file,$line);
 
-		$this->set_backtrace_data($file,$line);
+    }
 
-		$pdo_st = $this->query($query,$file,$line);
-		return $this->fetch($pdo_st, 1, $file,$line);
-	}
+    /**
+     * Возвращает один ряд с данными
+     *
+     * @param $query
+     * @param null $file
+     * @param null $line
+     * @return null Один ряд с данными
+     */
+    public function select_first_row_query($query,$file=null,$line=null){
+
+        if (!$this->connected)
+            return false;
+
+        $this->set_backtrace_data($file,$line);
+
+        $pdo_st = $this->query($query,$file,$line);
+        return $this->fetch($pdo_st, 1, $file,$line);
+    }
 
 
-	/**
-	 * Возвращает заголовки таблицы по имени таблицы (либо представления по его имени)
-	 * @param $table
-	 * @param null $file
-	 * @param null $line
-	 */
-	public function get_headers($table,$file=null,$line=null){
+    /**
+     * Возвращает заголовки таблицы по имени таблицы (либо представления по его имени)
+     * @param $table
+     * @param null $file
+     * @param null $line
+     */
+    public function get_headers($table,$file=null,$line=null){
 
-		if (!$this->connected)
-			return false;
+        if (!$this->connected)
+            return false;
 
-		$this->set_backtrace_data($file,$line);
+        $this->set_backtrace_data($file,$line);
 
-		$row = $this->select_first_row_query("SELECT * FROM $table",$file,$line);
-		return array_keys($row);
-	}
+        $row = $this->select_first_row_query("SELECT * FROM $table",$file,$line);
+        return array_keys($row);
+    }
 
-	#-----------------------------------
+    #-----------------------------------
 
-	/**
-	 * Возвращает либо один ряд, либо массив с рядами, в зависимости от параметра $only_first_row, или null если нифига нет.
-	 * @param $pdo_st
-	 * @param null $only_first_row
-	 * @param null $file
-	 * @param null $line
-	 * @return
-	 */
-	private function fetch($pdo_st, $only_first_row = null, $file = null,$line = null){
+    /**
+     * Возвращает либо один ряд, либо массив с рядами, в зависимости от параметра $only_first_row, или null если нифига нет.
+     * @param $pdo_st
+     * @param null $only_first_row
+     * @param null $file
+     * @param null $line
+     * @return
+     */
+    private function fetch($pdo_st, $only_first_row = null, $file = null,$line = null){
 
-		$this->check_pdo_st($pdo_st,$file,$line);
+        $this->check_pdo_st($pdo_st,$file,$line);
 
-		$fetch_method = 'fetch' . ($only_first_row ? '' : 'All');
+        $fetch_method = 'fetch' . ($only_first_row ? '' : 'All');
 
-		$fetched = $pdo_st->{$fetch_method}(PDO::FETCH_ASSOC);
-		return $fetched ? : null;
-	}
+        $fetched = $pdo_st->{$fetch_method}(PDO::FETCH_ASSOC);
+        return $fetched ? : null;
+    }
 
-	/**
-	 * Отлавливает ошибки в sql запросе
-	 * @param $pdo_st
-	 * @param null $file
-	 * @param null $line
-	 * @return bool
-	 */
-	private function check_pdo_st($pdo_st,$file = null, $line = null){
-		if (!$pdo_st){
-			$error_message_arr = $this->pdo->errorInfo();
-			cErrorHandler::sql_query_error($error_message_arr[2],$file,$line);
-			return false;
-		}
-	}
+    /**
+     * Отлавливает ошибки в sql запросе
+     * @param $pdo_st
+     * @param null $file
+     * @param null $line
+     * @return bool
+     */
+    private function check_pdo_st($pdo_st,$file = null, $line = null){
+        if (!$pdo_st){
+            $error_message_arr = $this->pdo->errorInfo();
+            cErrorHandler::sql_query_error($error_message_arr[2],$file,$line);
+            return false;
+        }
+    }
 
-	//Выполняет запрос и возвращает pdo statement
-	private function query($query,$file = null,$line = null){
-		if (!$this->connected)
-			return false;
+    //Выполняет запрос и возвращает pdo statement
+    private function query($query,$file = null,$line = null){
+        if (!$this->connected)
+            return false;
 
-		$pdo_st = $this->pdo->query($query);
-		$this->last_query = $query;
+        $pdo_st = $this->pdo->query($query);
+        $this->last_query = $query;
 
-		return $pdo_st;
-	}
+        return $pdo_st;
+    }
 
-	private function set_backtrace_data(&$file,&$line){
-		if(!$file || !$line){
-			$backtrace = debug_backtrace();
-			$file	  = $backtrace[1]['file'];
-			$line	  = $backtrace[1]['line'];
-		}
-	}
+    private function set_backtrace_data(&$file,&$line){
+        if(!$file || !$line){
+            $backtrace = debug_backtrace();
+            $file      = $backtrace[1]['file'];
+            $line      = $backtrace[1]['line'];
+        }
+    }
 
 }

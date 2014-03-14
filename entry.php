@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(0);
+ini_set("display_errors", 0);
 
 //Подключаем файл конфигурации
 require_once 'config.php';

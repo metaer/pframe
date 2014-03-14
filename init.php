@@ -20,8 +20,8 @@ const EL = PHP_EOL;
 define('ADD_TIME_TO_JS_CSS',WORKING_VERSION);
 
 if (WORKING_VERSION && TECHNICAL_WORK){
-	header("HTTP/1.1 503 Service Unavailable",null,503);
-	die('Технические работы');
+    header("HTTP/1.1 503 Service Unavailable",null,503);
+    die('Технические работы');
 }
 
 //Разделитель директорий
